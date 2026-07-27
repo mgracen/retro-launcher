@@ -2,7 +2,7 @@
 # Living Room '82 - Retro Console Launcher
 
 A browser-based library browser, ROM scanner, box-art fetcher, and
-high-score tracker for Atari 2600, Intellivision, and ColecoVision —
+high-score tracker for Atari 2600 —
 built on [EmulatorJS](https://emulatorjs.org). Point it at your
 existing ROM folder and it lists everything automatically, complete
 with real cover art, no copying required.
