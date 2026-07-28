@@ -212,3 +212,4 @@ const RomLibrary = (() => {
     isConnected, getGames, getBlobUrl, getBiosBlobUrl, hasBios,
   };
 })();
+ROMLIBEOF
