@@ -1,3 +1,4 @@
+<img width="716" height="270" alt="Screenshot 2026-07-28 2 51 35 PM" src="https://github.com/user-attachments/assets/2c85465a-7bf0-4f22-bceb-cc8dbad6dcc0" />
 # Living Room '82 - Retro Console Launcher
 
 A browser-based library browser, ROM scanner, box-art fetcher, and
