@@ -1,4 +1,3 @@
-
 /*
   ROM LIBRARY
   ------------------------------------------------------------
@@ -7,13 +6,13 @@
   time. Uses the browser's File System Access API:
     - You click "Choose ROM Folder" once and grant read access.
     - The folder handle is remembered (via IndexedDB) so you
-      don't have to re-pick it every session — the browser will
+      don't have to re-pick it every session - the browser will
       just ask you to re-confirm access with one click.
     - Every file inside is scanned recursively, matched to a
       system by folder name / extension, and turned into a
       playable entry automatically.
 
-  This only works in Chromium browsers (Chrome, Edge — which
+  This only works in Chromium browsers (Chrome, Edge - which
   covers both your Windows PC and the Chromebook). Nothing is
   uploaded anywhere; the browser reads the files locally to
   hand them to the emulator core.
@@ -75,7 +74,16 @@ const RomLibrary = (() => {
       if (pattern.test(path)) return sys;
     }
     const ext = filename.split(".").pop().toLowerCase();
-    return EXT_SYSTEM[ext] || null; // .bin/.rom are ambiguous without a folder hint
+    if (EXT_SYSTEM[ext]) return EXT_SYSTEM[ext];
+    // Fallback: this project is currently Atari-focused (see
+    // VISIBLE_SYSTEMS in app.js), so an unrecognized extension with
+    // no folder hint (e.g. a plain .bin sitting in the root folder
+    // you picked) defaults to Atari rather than being silently
+    // skipped. If you bring Intellivision/ColecoVision back and mix
+    // file types in one flat folder, organize them into subfolders
+    // named with "atari"/"intv"/"coleco" so this fallback doesn't
+    // miscategorize them.
+    return "atari2600";
   }
 
   function normalizeId(filename) {
@@ -161,10 +169,10 @@ const RomLibrary = (() => {
     return "needs-permission"; // must be re-granted via a user click
   }
 
-  // Call this from a click handler — requestPermission needs a user gesture
+  // Call this from a click handler - requestPermission needs a user gesture
   async function reconnectWithPermission() {
     const handle = await idbGet(HANDLE_KEY);
-    if (!handle) throw new Error("No remembered folder — use connect() instead.");
+    if (!handle) throw new Error("No remembered folder - use connect() instead.");
     const perm = await handle.requestPermission({ mode: "read" });
     if (perm !== "granted") return false;
     await loadFrom(handle);
