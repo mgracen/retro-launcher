@@ -1,0 +1,309 @@
+/* =========================================================
+   TOKENS
+   Subject: a 1982 living-room console shelf - wood-panel
+   cabinet housing three machines, viewed through a CRT.
+   ========================================================= */
+:root {
+  --wood-dark: #241811;
+  --wood: #3a2818;
+  --wood-light: #55392152;
+  --crt-black: #0c0c0e;
+  --crt-glow: #6fff8f;
+  --cream: #f0e6d2;
+  --atari: #d94f2b;
+  --intv: #c9a227;
+  --coleco: #c0272d;
+  --radius: 3px;
+  --font-display: "Press Start 2P", monospace;
+  --font-body: "VT323", monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    repeating-linear-gradient(90deg, var(--wood) 0 2px, var(--wood-dark) 2px 40px);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 20px;
+}
+
+/* -------- header / marquee -------- */
+.marquee {
+  text-align: center;
+  padding: 28px 16px 20px;
+}
+.marquee h1 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 2px;
+  margin: 0;
+  color: var(--crt-glow);
+  text-shadow: 0 0 8px rgba(111, 255, 143, 0.55);
+}
+.marquee p {
+  margin: 10px 0 0;
+  opacity: 0.7;
+  font-size: 18px;
+}
+
+/* -------- system tabs (console badges) -------- */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  padding: 0 16px 20px;
+  flex-wrap: wrap;
+}
+.tab {
+  font-family: var(--font-display);
+  font-size: 11px;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  border: 2px solid var(--tab-color, var(--cream));
+  background: var(--crt-black);
+  color: var(--tab-color, var(--cream));
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.tab:hover { transform: translateY(-2px); }
+.tab.active {
+  background: var(--tab-color, var(--cream));
+  color: var(--crt-black);
+  box-shadow: 0 0 14px var(--tab-color, var(--cream));
+}
+
+.search-bar {
+  max-width: 400px;
+  margin: 0 auto 24px;
+  padding: 0 16px;
+}
+#search-input {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 18px;
+  padding: 10px 14px;
+  background: var(--crt-black);
+  border: 2px solid #333;
+  border-radius: var(--radius);
+  color: var(--cream);
+}
+#search-input:focus {
+  outline: none;
+  border-color: var(--crt-glow);
+}
+#search-input::placeholder {
+  color: #666;
+}
+
+/* -------- library connect / status bar -------- */
+.library-status {
+  max-width: 640px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 0 16px;
+  text-align: center;
+}
+.library-status .meta {
+  font-size: 15px;
+  opacity: 0.6;
+}
+.btn.small {
+  font-size: 14px;
+  padding: 6px 12px;
+  margin: 0;
+}
+
+/* -------- controller status strip (signature element) -------- */
+.controller-strip {
+  max-width: 640px;
+  margin: 0 auto 24px;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 10px;
+}
+.pad-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  opacity: 0.5;
+}
+.pad-indicator.live { opacity: 1; }
+.led {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #3a3a3a;
+  box-shadow: inset 0 0 2px #000;
+}
+.pad-indicator.live .led {
+  background: var(--crt-glow);
+  box-shadow: 0 0 8px var(--crt-glow);
+}
+
+/* -------- CRT screen frame around the game grid -------- */
+.crt-frame {
+  max-width: 1000px;
+  margin: 0 auto 40px;
+  background: var(--crt-black);
+  border: 10px solid #1a1a1a;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 0 0 3px #000, 0 20px 40px rgba(0,0,0,0.6);
+  position: relative;
+  overflow: hidden;
+}
+.crt-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg, rgba(0,0,0,0.15) 0 1px, transparent 1px 3px
+  );
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  background: #14100d;
+  border: 1px solid #2a2a2a;
+  border-radius: var(--radius);
+  padding: 14px;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 0 2px var(--card-color, var(--cream));
+}
+.card .art {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  background: var(--card-color, #333);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 10px;
+  color: #000;
+  text-align: center;
+  padding: 6px;
+  margin-bottom: 10px;
+}
+.card h3 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: normal;
+}
+.card .meta {
+  font-size: 15px;
+  opacity: 0.65;
+}
+.badge-2p {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 12px;
+  padding: 2px 6px;
+  border: 1px solid var(--crt-glow);
+  color: var(--crt-glow);
+  border-radius: 2px;
+}
+
+/* -------- player overlay (launch screen + prompts) -------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 50;
+  padding: 20px;
+  text-align: center;
+}
+.overlay.hidden { display: none; }
+.overlay h2 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--crt-glow);
+  margin-bottom: 16px;
+}
+.overlay p { font-size: 20px; opacity: 0.85; max-width: 480px; }
+.overlay button, .btn {
+  font-family: var(--font-body);
+  font-size: 18px;
+  background: var(--crt-glow);
+  color: #000;
+  border: none;
+  padding: 10px 22px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  margin-top: 16px;
+}
+.overlay button.secondary {
+  background: transparent;
+  border: 1px solid var(--cream);
+  color: var(--cream);
+}
+
+#game-container {
+  width: min(960px, 92vw);
+  aspect-ratio: 4 / 3;
+  background: #000;
+}
+
+.controls-legend {
+  max-width: 700px;
+  margin: 14px auto 0;
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.85;
+  padding: 10px 16px;
+  border: 1px solid #333;
+  border-radius: var(--radius);
+  background: #14100d;
+}
+
+.credits {
+  text-align: center;
+  padding: 24px 16px 40px;
+  font-size: 13px;
+  opacity: 0.55;
+}
+.credits a {
+  color: var(--crt-glow);
+  text-decoration: none;
+}
+.credits a:hover {
+  text-decoration: underline;
+}
+
+.scores-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+  font-size: 18px;
+  text-align: left;
+  max-width: 300px;
+}
+.scores-list li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dotted #444;
+  padding: 4px 0;
+}
