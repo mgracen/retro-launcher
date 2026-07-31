@@ -8,6 +8,8 @@ high-score tracker for Atari 2600, built on
 folder and it lists everything automatically, complete with real
 cover art, no copying required.
 
+Get it at: https://github.com/mgracen/retro-launcher/
+
 ## What's included
 
 - **Library browsing** - scans your existing ROM folder (via the
